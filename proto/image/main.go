@@ -72,10 +72,12 @@ func main() {
 		log.Fatalln(err)
 	}
 	path := fileURL.Path
+	log.Printf(path)
 	segments := strings.Split(path, "/")
+
 	fileName = segments[len(segments)-1]
 	log.Printf(fileName)
-	file, err := os.Create(fileName)
+	file, err := os.Create("/home/dietpi/" + fileName)
 	if err != nil {
 		log.Printf("file create err")
 		log.Fatalln(err)
