@@ -65,7 +65,7 @@ func main() {
 	tk := canvas.NewToolKit(m)
 	defer tk.Close()
 
-	fullURLFile = "http://api.pumpguard.net/api/dota/download/i3.jpg"
+	fullURLFile = "http://api.pumpguard.net/api/dota/download/public.jpg"
 	fileURL, err := url.Parse(fullURLFile)
 	if err != nil {
 		log.Printf("err inn praseing url")
