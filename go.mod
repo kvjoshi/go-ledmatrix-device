@@ -10,8 +10,6 @@ require (
 	golang.org/x/exp v0.0.0-20211012155715-ffe10e552389
 	golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8
 	golang.org/x/mobile v0.0.0-20210924032853-1c027f395ef7
-	github.com/mcuadros/go-rpi-rgb-led-matrix/pkg/canvas v1
-	github.com/mcuadros/go-rpi-rgb-led-matrix/pkg/matrix v1
 )
 
 require (
