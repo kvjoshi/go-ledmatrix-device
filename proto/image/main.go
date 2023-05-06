@@ -2,10 +2,12 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/BoskyWSMFN/go-rpi-rgb-led-matrix/pkg/canvas"
 	"github.com/BoskyWSMFN/go-rpi-rgb-led-matrix/pkg/matrix"
 	"github.com/disintegration/imaging"
 	"image"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -40,9 +42,9 @@ var (
 )
 
 func main() {
-	f, err := os.Open(*img)
-	fatal(err)
-	img, _, err := image.Decode(f)
+	//f, err := os.Open(*img)
+	//fatal(err)
+	//img, _, err := image.Decode(f)
 	config := &matrix.DefaultConfig
 	config.Rows = *rows
 	config.Cols = *cols
@@ -73,11 +75,37 @@ func main() {
 	segments := strings.Split(path, "/")
 	fileName = segments[len(segments)-1]
 	log.Printf(fileName)
-	resp, err := http.Get("http://api.tankoncloud.com/api/")
+	file, err := os.Create(fileName)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	body, err := ioutil.ReadAll(resp.Body)
+
+	client := http.Client{
+		CheckRedirect: func(r *http.Request, via []*http.Request) error {
+			r.URL.Opaque = r.URL.Path
+			return nil
+		},
+	}
+
+	resp, err := client.Get(fullURLFile)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	defer resp.Body.Close()
+	size, err := io.Copy(file, resp.Body)
+
+	defer file.Close()
+
+	fmt.Printf("Downloaded file %s with size %d", fileName, size)
+
+	img1, _, err := image.Decode(file)
+
+	resp1, err := http.Get("http://api.tankoncloud.com/api/")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	body, err := ioutil.ReadAll(resp1.Body)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -95,7 +123,7 @@ func main() {
 	var dur time.Duration
 	dur = 30
 
-	tk.PlayImage(img, dur)
+	tk.PlayImage(img1, dur)
 	//	fatal(err)
 	time.Sleep(time.Second * 1000000)
 	//	close <- true
