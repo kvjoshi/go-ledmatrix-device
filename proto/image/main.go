@@ -65,7 +65,7 @@ func main() {
 	tk := canvas.NewToolKit(m)
 	defer tk.Close()
 
-	fullURLFile = "http://api.pumpguard.net/api/dota/download/6.jpg"
+	fullURLFile = "http://api.pumpguard.net/api/dota/download/i1.jpg"
 	fileURL, err := url.Parse(fullURLFile)
 	if err != nil {
 		log.Printf("err inn praseing url")
@@ -100,6 +100,11 @@ func main() {
 	size, err := io.Copy(file, resp.Body)
 
 	defer file.Close()
+	err = os.Chmod(fileName, 0777)
+	if err != nil {
+		log.Printf("err in chmod")
+		log.Fatalln(err)
+	}
 
 	fmt.Printf("Downloaded file %s with size %d", fileName, size)
 
