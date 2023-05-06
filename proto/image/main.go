@@ -9,7 +9,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -30,6 +32,11 @@ var (
 	img                    = flag.String("image", "/home/dietpi/cc/i2.jpg", "image path")
 
 	rotate = flag.Int("rotate", 0, "rotate angle, 90, 180, 270")
+)
+
+var (
+	fileName    string
+	fullURLFile string
 )
 
 func main() {
@@ -56,8 +63,16 @@ func main() {
 
 	tk := canvas.NewToolKit(m)
 	defer tk.Close()
-	var URL string
-	URL = "https://api.tankoncloud.com/api"
+
+	fullURLFile = "http://api.pumpguard.net/api/dota/download/6.jpg"
+	fileURL, err := url.Parse(fullURLFile)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	path := fileURL.Path
+	segments := strings.Split(path, "/")
+	fileName = segments[len(segments)-1]
+	log.Printf(fileName)
 	resp, err := http.Get(URL)
 	if err != nil {
 		log.Fatalln(err)
