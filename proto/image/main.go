@@ -8,7 +8,6 @@ import (
 	"github.com/disintegration/imaging"
 	"image"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -69,6 +68,7 @@ func main() {
 	fullURLFile = "http://api.pumpguard.net/api/dota/download/6.jpg"
 	fileURL, err := url.Parse(fullURLFile)
 	if err != nil {
+		log.Printf("err inn praseing url")
 		log.Fatalln(err)
 	}
 	path := fileURL.Path
@@ -77,6 +77,7 @@ func main() {
 	log.Printf(fileName)
 	file, err := os.Create(fileName)
 	if err != nil {
+		log.Printf("file create err")
 		log.Fatalln(err)
 	}
 
@@ -89,6 +90,7 @@ func main() {
 
 	resp, err := client.Get(fullURLFile)
 	if err != nil {
+		log.Printf("get req err")
 		log.Fatalln(err)
 	}
 
@@ -100,18 +102,23 @@ func main() {
 	fmt.Printf("Downloaded file %s with size %d", fileName, size)
 
 	img1, _, err := image.Decode(file)
+	if err != nil {
+		log.Printf("image decode err")
+		log.Fatalln(err)
+	}
 
-	resp1, err := http.Get("http://api.tankoncloud.com/api/")
+	/*resp1, err := http.Get("http://api.tankoncloud.com/api/")
 	if err != nil {
 		log.Fatalln(err)
 	}
 	body, err := ioutil.ReadAll(resp1.Body)
 	if err != nil {
+
 		log.Fatalln(err)
 	}
 	sb := string(body)
 	log.Printf(sb)
-
+	*/
 	switch *rotate {
 	case 90:
 		tk.Transform = imaging.Rotate90
