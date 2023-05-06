@@ -24,7 +24,7 @@ var (
 	brightness             = flag.Int("brightness", 100, "brightness (0-100)")
 	gpio_slowdown          = flag.Int("led-gpio-slowdown", 3, "GPIO SLOWDOWN")
 	pwm_lsb                = flag.Int("led-pwm-lsb-nanoseconds", 70, "lsb nanosec")
-	pwm_bits               = flag.Int("led-pwm-bits", 5, "pwm bits")
+	pwm_bits               = flag.Int("led-pwm-bits", 9, "pwm bits")
 	hardwareMapping        = flag.String("led-gpio-mapping", "regular", "Name of GPIO mapping used.")
 	showRefresh            = flag.Bool("led-show-refresh", true, "Show refresh rate.")
 	inverseColors          = flag.Bool("led-inverse", false, "Switch if your matrix has inverse colors on.")
