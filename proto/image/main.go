@@ -103,7 +103,11 @@ func main() {
 
 	fmt.Printf("Downloaded file %s with size %d", fileName, size)
 
-	img1, _, err := image.Decode(file)
+	f, err := os.Open(fileName)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	img1, _, err := image.Decode(f)
 	if err != nil {
 		log.Printf("image decode err")
 		log.Fatalln(err)
