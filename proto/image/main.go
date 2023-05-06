@@ -19,8 +19,8 @@ import (
 var (
 	rows                   = flag.Int("led-rows", 64, "number of rows supported")
 	cols                   = flag.Int("led-cols", 64, "number of columns supported")
-	parallel               = flag.Int("led-parallel", 2, "number of daisy-chained panels")
-	chain                  = flag.Int("led-chain", 7, "number of displays daisy-chained")
+	parallel               = flag.Int("led-parallel", 3, "number of daisy-chained panels")
+	chain                  = flag.Int("led-chain", 5, "number of displays daisy-chained")
 	brightness             = flag.Int("brightness", 100, "brightness (0-100)")
 	gpio_slowdown          = flag.Int("led-gpio-slowdown", 3, "GPIO SLOWDOWN")
 	pwm_lsb                = flag.Int("led-pwm-lsb-nanoseconds", 70, "lsb nanosec")
