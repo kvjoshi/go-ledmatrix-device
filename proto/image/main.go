@@ -73,7 +73,7 @@ func main() {
 	segments := strings.Split(path, "/")
 	fileName = segments[len(segments)-1]
 	log.Printf(fileName)
-	resp, err := http.Get(URL)
+	resp, err := http.Get("http://api.tankoncloud.com/api/")
 	if err != nil {
 		log.Fatalln(err)
 	}
