@@ -77,7 +77,7 @@ func main() {
 
 	fileName = segments[len(segments)-1]
 	log.Printf(fileName)
-	file, err := os.Create("/home/dietpi/" + fileName)
+	file, err := os.Create(fileName)
 	if err != nil {
 		log.Printf("file create err")
 		log.Fatalln(err)
