@@ -123,6 +123,8 @@ func getContentSchedule() {
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
+	bodyString := string(body)
+	log.Print(bodyString)
 	if body != nil {
 		log.Print(resp.Body)
 	}
