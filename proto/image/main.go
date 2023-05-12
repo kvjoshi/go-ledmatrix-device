@@ -8,6 +8,7 @@ import (
 	"github.com/disintegration/imaging"
 	"image"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -121,8 +122,8 @@ func getContentSchedule() {
 	}
 
 	defer resp.Body.Close()
-
-	if resp.Body != nil {
+	body, err := ioutil.ReadAll(resp.Body)
+	if body != nil {
 		log.Print(resp.Body)
 	}
 
