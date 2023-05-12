@@ -99,7 +99,7 @@ func fetchImg(imgUrl string) image.Image {
 
 func getContentSchedule() {
 	//getScheduleUrl := "http://142.93.198.132:3000/api/s/getSchedule"
-	getScheduleUrl := "http://192.168.1.2:3000/api/s/getSchedule"
+	getScheduleUrl := "http://192.168.1.2:3000/api/s/getScheduleBySID"
 	/* scheduleURL, err := url.Parse(getScheduleUrl)
 	if err != nil {
 		log.Printf("err in parsing schedule url")
