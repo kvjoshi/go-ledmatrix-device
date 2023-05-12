@@ -96,10 +96,44 @@ func fetchImg(imgUrl string) image.Image {
 	return img1
 
 }
+
+func getContentSchedule() {
+	getScheduleUrl := "http://142.93.198.132:3000/api/s/getSchedule"
+	scheduleURL, err := url.Parse(getScheduleUrl)
+	if err != nil {
+		log.Printf("err in parsing schedule url")
+	}
+	client := http.Client{
+		CheckRedirect: func(r *http.Request, via []*http.Request) error {
+			r.URL.Opaque = r.URL.Path
+			return nil
+		},
+	}
+
+	scheduleRequestBody := `{
+    "scheduleId":"645255100283e16678c9e609"
+	}`
+	if err != nil {
+		return
+	}
+	resp, err := client.PostForm(getScheduleUrl, url.Values{"scheduleId": {"645255100283e16678c9e609"}})
+	if err != nil {
+		log.Printf("get req err")
+		log.Fatalln(err)
+	}
+
+	defer resp.Body.Close()
+
+	if resp.Body != nil {
+		log.Print(resp.Body)
+	}
+
+}
 func main() {
 	//f, err := os.Open(*img)
 	//fatal(err)
 	//img, _, err := image.Decode(f)
+	getContentSchedule()
 	config := &matrix.DefaultConfig
 	config.Rows = *rows
 	config.Cols = *cols
