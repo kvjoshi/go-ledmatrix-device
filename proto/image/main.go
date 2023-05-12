@@ -40,35 +40,11 @@ var (
 	fullURLFile string
 )
 
-func main() {
-	//f, err := os.Open(*img)
-	//fatal(err)
-	//img, _, err := image.Decode(f)
-	config := &matrix.DefaultConfig
-	config.Rows = *rows
-	config.Cols = *cols
-	config.SlowdownGPIO = *gpio_slowdown
-	config.PWMBits = *pwm_bits
-	config.PWMLSBNanoseconds = *pwm_lsb
-	config.Parallel = *parallel
-	config.ChainLength = *chain
-	config.Brightness = *brightness
-	config.HardwareMapping = *hardwareMapping
-	config.ShowRefreshRate = *showRefresh
-	config.InverseColors = *inverseColors
-	config.DisableHardwarePulsing = *disableHardwarePulsing
-	//	config.PixelMapping = *pixelMapping
-
-	m, err := matrix.NewRGBLedMatrix(config)
-	fatal(err)
-
-	tk := canvas.NewToolKit(m)
-	defer tk.Close()
-
-	fullURLFile = "http://api.pumpguard.net/api/dota/download/public.jpg"
+func fetchImg(imgUrl string) image.Image {
+	fullURLFile = imgUrl
 	fileURL, err := url.Parse(fullURLFile)
 	if err != nil {
-		log.Printf("err inn praseing url")
+		log.Printf("err in prasing url")
 		log.Fatalln(err)
 	}
 	path := fileURL.Path
@@ -117,6 +93,33 @@ func main() {
 		log.Printf("image decode err")
 		log.Fatalln(err)
 	}
+	return img1
+
+}
+func main() {
+	//f, err := os.Open(*img)
+	//fatal(err)
+	//img, _, err := image.Decode(f)
+	config := &matrix.DefaultConfig
+	config.Rows = *rows
+	config.Cols = *cols
+	config.SlowdownGPIO = *gpio_slowdown
+	config.PWMBits = *pwm_bits
+	config.PWMLSBNanoseconds = *pwm_lsb
+	config.Parallel = *parallel
+	config.ChainLength = *chain
+	config.Brightness = *brightness
+	config.HardwareMapping = *hardwareMapping
+	config.ShowRefreshRate = *showRefresh
+	config.InverseColors = *inverseColors
+	config.DisableHardwarePulsing = *disableHardwarePulsing
+	//	config.PixelMapping = *pixelMapping
+
+	m, err := matrix.NewRGBLedMatrix(config)
+	fatal(err)
+
+	tk := canvas.NewToolKit(m)
+	defer tk.Close()
 
 	/*resp1, err := http.Get("http://api.tankoncloud.com/api/")
 	if err != nil {
@@ -130,6 +133,8 @@ func main() {
 	sb := string(body)
 	log.Printf(sb)
 	*/
+
+	img1 := fetchImg("http://api.pumpguard.net/api/dota/download/public.jpg")
 	switch *rotate {
 	case 90:
 		tk.Transform = imaging.Rotate90
