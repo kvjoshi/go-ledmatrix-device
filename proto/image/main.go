@@ -99,23 +99,20 @@ func fetchImg(imgUrl string) image.Image {
 
 func getContentSchedule() {
 	getScheduleUrl := "http://142.93.198.132:3000/api/s/getSchedule"
-	scheduleURL, err := url.Parse(getScheduleUrl)
+	/* scheduleURL, err := url.Parse(getScheduleUrl)
 	if err != nil {
 		log.Printf("err in parsing schedule url")
-	}
+	} */
 	client := http.Client{
 		CheckRedirect: func(r *http.Request, via []*http.Request) error {
 			r.URL.Opaque = r.URL.Path
 			return nil
 		},
 	}
-
-	scheduleRequestBody := `{
-    "scheduleId":"645255100283e16678c9e609"
-	}`
-	if err != nil {
-		return
-	}
+	/*
+	   	scheduleRequestBody := `{
+	       "scheduleId":"645255100283e16678c9e609"
+	   	}`*/
 	resp, err := client.PostForm(getScheduleUrl, url.Values{"scheduleId": {"645255100283e16678c9e609"}})
 	if err != nil {
 		log.Printf("get req err")
