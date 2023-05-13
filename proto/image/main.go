@@ -201,7 +201,7 @@ func main() {
 	}
 
 	img1 := fetchImg(schedule[0].ContentPath)
-
+	time.Sleep(time.Second * 100)
 	var dur time.Duration
 	dur = 30
 
