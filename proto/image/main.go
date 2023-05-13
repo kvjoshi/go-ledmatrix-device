@@ -93,6 +93,7 @@ func fetchImg(imgUrl string) image.Image {
 			log.Fatalln(err)
 		}
 		size, err := io.Copy(file, resp.Body)
+		log.Printf("upstream size %d ......", size)
 		defer file.Close()
 		err = os.Chmod(fileName, 0777)
 		if err != nil {
