@@ -42,7 +42,7 @@ var (
 )
 
 func fetchImg(imgUrl string) image.Image {
-	fullURLFile = "\"http://api.pumpguard.net/api/dota/download/\"" + imgUrl
+	fullURLFile = "http://api.pumpguard.net/api/dota/download/" + imgUrl
 	fileURL, err := url.Parse(fullURLFile)
 	if err != nil {
 		log.Printf("err in prasing url")
