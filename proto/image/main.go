@@ -199,11 +199,13 @@ func main() {
 		}
 	*/
 	var dur time.Duration
-	for _, a := range schedule {
-		img1 := fetchImg(a.ContentPath)
-		dur = 30
-		tk.PlayImage(img1, dur)
-		time.Sleep(time.Second * dur)
+	for {
+		for _, a := range schedule {
+			img1 := fetchImg(a.ContentPath)
+			dur = 30
+			tk.PlayImage(img1, dur)
+			time.Sleep(time.Second * dur)
+		}
 	}
 
 	//	fatal(err)
