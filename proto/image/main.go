@@ -196,15 +196,16 @@ func main() {
 	*/
 	schedule := getContentSchedule()
 	for _, a := range schedule {
-
-		img1 := fetchImg(a.ContentPath)
-
-		var dur time.Duration
-		dur = 30
-
-		tk.PlayImage(img1, dur)
+		print(a.ContentPath)
 
 	}
+
+	img1 := fetchImg(schedule[0].ContentPath)
+
+	var dur time.Duration
+	dur = 30
+
+	tk.PlayImage(img1, dur)
 	//	fatal(err)
 	time.Sleep(time.Second * 1000000)
 	//	close <- true
