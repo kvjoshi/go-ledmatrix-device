@@ -44,6 +44,13 @@ var (
 	fullURLFile string
 )
 
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
+}
 func fetchImg(imgUrl string) image.Image {
 	fullURLFile = "http://api.pumpguard.net/api/dota/download/" + imgUrl
 	fileURL, err := url.Parse(fullURLFile)
@@ -77,16 +84,19 @@ func fetchImg(imgUrl string) image.Image {
 	}
 
 	defer resp.Body.Close()
-	size, err := io.Copy(file, resp.Body)
 
-	defer file.Close()
-	err = os.Chmod(fileName, 0777)
-	if err != nil {
-		log.Printf("err in chmod")
-		log.Fatalln(err)
+	if fileExists(fileName) {
+		log.Printf("not downloading file %s as already exists", fileName)
+	} else {
+		size, err := io.Copy(file, resp.Body)
+		defer file.Close()
+		err = os.Chmod(fileName, 0777)
+		if err != nil {
+			log.Printf("err in chmod")
+			log.Fatalln(err)
+		}
+		fmt.Printf("Downloaded file %s with size %d", fileName, size)
 	}
-
-	fmt.Printf("Downloaded file %s with size %d", fileName, size)
 
 	f, err := os.Open(fileName)
 	if err != nil {
