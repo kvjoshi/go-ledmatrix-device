@@ -135,7 +135,7 @@ func fetchImg(imgUrl string) image.Image {
 type Schedule struct {
 	ContentName string
 	ContentPath string
-	Time        time.Duration
+	Time        string
 }
 
 func getContentSchedule() []Schedule {
@@ -233,9 +233,9 @@ func main() {
 	for {
 		for _, a := range schedule {
 			img1 := fetchImg(a.ContentPath)
-			dur = a.Time
+			dur, err = time.ParseDuration(a.Time)
 			tk.PlayImage(img1, dur)
-			time.Sleep(time.Second * dur)
+			time.Sleep(dur)
 		}
 	}
 
