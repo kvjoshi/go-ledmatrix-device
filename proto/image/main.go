@@ -82,6 +82,8 @@ func fetchImg(imgUrl string) image.Image {
 
 	defer resp.Body.Close()
 
+	length := resp.ContentLength
+	log.Printf("size %d", length)
 	if fileExists(fileName) {
 		log.Printf("not downloading file %s as already exists", fileName)
 	} else {
