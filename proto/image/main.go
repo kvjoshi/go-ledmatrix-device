@@ -129,9 +129,9 @@ func getContentSchedule() []Schedule {
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
-	bodyString := string(body)
-	log.Printf("body:")
-	log.Print(bodyString)
+	//bodyString := string(body)
+	//log.Printf("body:")
+	//log.Print(bodyString)
 	var schedule []Schedule
 	err2 := json.Unmarshal(body, &schedule)
 	if err2 != nil {
@@ -152,7 +152,8 @@ func main() {
 	//f, err := os.Open(*img)
 	//fatal(err)
 	//img, _, err := image.Decode(f)
-	getContentSchedule()
+
+	schedule := getContentSchedule()
 	config := &matrix.DefaultConfig
 	config.Rows = *rows
 	config.Cols = *cols
@@ -194,7 +195,6 @@ func main() {
 			tk.Transform = imaging.Rotate270
 		}
 	*/
-	schedule := getContentSchedule()
 	for _, a := range schedule {
 		print(a.ContentPath)
 
