@@ -199,15 +199,14 @@ func main() {
 		}
 	*/
 	for _, a := range schedule {
-		print(a.ContentPath)
 
+		img1 := fetchImg(a.ContentPath)
+		var dur time.Duration
+		dur = 30
+
+		tk.PlayImage(img1, dur)
 	}
 
-	img1 := fetchImg("6.jpeg")
-	var dur time.Duration
-	dur = 30
-
-	tk.PlayImage(img1, dur)
 	//	fatal(err)
 	time.Sleep(time.Second * 1000000)
 	//	close <- true
