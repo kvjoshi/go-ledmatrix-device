@@ -198,13 +198,12 @@ func main() {
 			tk.Transform = imaging.Rotate270
 		}
 	*/
+	var dur time.Duration
 	for _, a := range schedule {
-
 		img1 := fetchImg(a.ContentPath)
-		var dur time.Duration
 		dur = 30
-
 		tk.PlayImage(img1, dur)
+		time.Sleep(time.Second * dur)
 	}
 
 	//	fatal(err)
