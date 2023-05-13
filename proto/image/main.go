@@ -200,7 +200,7 @@ func main() {
 
 	}
 
-	img1 := fetchImg("public.jpeg")
+	img1 := fetchImg("6.jpeg")
 	var dur time.Duration
 	dur = 30
 
