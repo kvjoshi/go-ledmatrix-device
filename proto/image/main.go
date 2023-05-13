@@ -42,7 +42,7 @@ var (
 )
 
 func fetchImg(imgUrl string) image.Image {
-	fullURLFile = "\"http://api.pumpguard.net/api/dota/download/public.jpg/\"" + imgUrl
+	fullURLFile = "\"http://api.pumpguard.net/api/dota/download/\"" + imgUrl
 	fileURL, err := url.Parse(fullURLFile)
 	if err != nil {
 		log.Printf("err in prasing url")
@@ -203,6 +203,7 @@ func main() {
 		dur = 30
 
 		tk.PlayImage(img1, dur)
+
 	}
 	//	fatal(err)
 	time.Sleep(time.Second * 1000000)
