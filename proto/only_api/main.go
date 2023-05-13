@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/BoskyWSMFN/go-rpi-rgb-led-matrix/pkg/canvas"
-	"github.com/BoskyWSMFN/go-rpi-rgb-led-matrix/pkg/matrix"
 	"image"
 	"io"
 	"io/ioutil"
@@ -42,7 +40,7 @@ var (
 )
 
 func fetchImg(imgUrl string) image.Image {
-	fullURLFile = "\"http://api.pumpguard.net/api/dota/download/public.jpg/\"" + imgUrl
+	fullURLFile = "\"http://api.pumpguard.net/api/dota/download/\"" + imgUrl
 	fileURL, err := url.Parse(fullURLFile)
 	if err != nil {
 		log.Printf("err in prasing url")
@@ -101,10 +99,9 @@ func fetchImg(imgUrl string) image.Image {
 type Schedule struct {
 	ContentName string
 	ContentPath string
-	Time        string
 }
 
-func getContentSchedule() []Schedule {
+func getContentSchedule() {
 	getScheduleUrl := "http://142.93.198.132:3000/api/sch/getScheduleBySidD"
 	//getScheduleUrl := "http://192.168.1.2:3000/api/sch/getScheduleBySidD"
 	/* scheduleURL, err := url.Parse(getScheduleUrl)
@@ -139,40 +136,18 @@ func getContentSchedule() []Schedule {
 		os.Exit(1)
 	}
 	//fmt.Print(schedule)
+	fmt.Println("// loop over array of structs of shipObject")
 	for _, a := range schedule {
-		fmt.Println(a)
+		fmt.Println(a.ContentPath)
 	}
-	return schedule
-}
-
-func show_img(schedule Schedule) {
-
 }
 func main() {
 	//f, err := os.Open(*img)
 	//fatal(err)
 	//img, _, err := image.Decode(f)
+	log.Printf("start")
 	getContentSchedule()
-	config := &matrix.DefaultConfig
-	config.Rows = *rows
-	config.Cols = *cols
-	config.SlowdownGPIO = *gpio_slowdown
-	config.PWMBits = *pwm_bits
-	config.PWMLSBNanoseconds = *pwm_lsb
-	config.Parallel = *parallel
-	config.ChainLength = *chain
-	config.Brightness = *brightness
-	config.HardwareMapping = *hardwareMapping
-	config.ShowRefreshRate = *showRefresh
-	config.InverseColors = *inverseColors
-	config.DisableHardwarePulsing = *disableHardwarePulsing
-	//	config.PixelMapping = *pixelMapping
-
-	m, err := matrix.NewRGBLedMatrix(config)
-	fatal(err)
-
-	tk := canvas.NewToolKit(m)
-	defer tk.Close()
+	log.Printf("got schedule")
 
 	/*resp1, err := http.Get("http://api.tankoncloud.com/api/")
 	if err != nil {
@@ -185,25 +160,10 @@ func main() {
 	}
 	sb := string(body)
 	log.Printf(sb)
-	switch *rotate {
-		case 90:
-			tk.Transform = imaging.Rotate90
-		case 180:
-			tk.Transform = imaging.Rotate180
-		case 270:
-			tk.Transform = imaging.Rotate270
-		}
 	*/
-	schedule := getContentSchedule()
-	for _, a := range schedule {
 
-		img1 := fetchImg(a.ContentPath)
+	//_ = fetchImg("public.jpg")
 
-		var dur time.Duration
-		dur = 30
-
-		tk.PlayImage(img1, dur)
-	}
 	//	fatal(err)
 	time.Sleep(time.Second * 1000000)
 	//	close <- true
