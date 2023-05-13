@@ -45,10 +45,12 @@ var (
 )
 
 func fileExists(filename string) bool {
+	//file, err := os.Open(filename)
 	info, err := os.Stat(filename)
 	if os.IsNotExist(err) {
 		return false
 	}
+	//file.Close()
 	return !info.IsDir()
 }
 func fetchImg(imgUrl string) image.Image {
@@ -64,11 +66,6 @@ func fetchImg(imgUrl string) image.Image {
 
 	fileName = segments[len(segments)-1]
 	log.Printf(fileName)
-	file, err := os.Create(fileName)
-	if err != nil {
-		log.Printf("file create err")
-		log.Fatalln(err)
-	}
 
 	client := http.Client{
 		CheckRedirect: func(r *http.Request, via []*http.Request) error {
@@ -88,6 +85,11 @@ func fetchImg(imgUrl string) image.Image {
 	if fileExists(fileName) {
 		log.Printf("not downloading file %s as already exists", fileName)
 	} else {
+		file, err := os.Create(fileName)
+		if err != nil {
+			log.Printf("file create err")
+			log.Fatalln(err)
+		}
 		size, err := io.Copy(file, resp.Body)
 		defer file.Close()
 		err = os.Chmod(fileName, 0777)
