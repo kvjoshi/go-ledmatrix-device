@@ -200,60 +200,7 @@ func main() {
 
 	}
 
-	//img1 := fetchImg("i1.jpg")
-	fullURLFile = "http://api.pumpguard.net/api/dota/download/" + schedule[0].ContentPath
-	fileURL, err := url.Parse(fullURLFile)
-	if err != nil {
-		log.Printf("err in prasing url")
-		log.Fatalln(err)
-	}
-	path := fileURL.Path
-	log.Printf(path)
-	segments := strings.Split(path, "/")
-
-	fileName = segments[len(segments)-1]
-	log.Printf(fileName)
-	file, err := os.Create(fileName)
-	if err != nil {
-		log.Printf("file create err")
-		log.Fatalln(err)
-	}
-
-	client := http.Client{
-		CheckRedirect: func(r *http.Request, via []*http.Request) error {
-			r.URL.Opaque = r.URL.Path
-			return nil
-		},
-	}
-
-	resp, err := client.Get(fullURLFile)
-	if err != nil {
-		log.Printf("get req err")
-		log.Fatalln(err)
-	}
-
-	defer resp.Body.Close()
-	size, err := io.Copy(file, resp.Body)
-
-	defer file.Close()
-	err = os.Chmod(fileName, 0777)
-	if err != nil {
-		log.Printf("err in chmod")
-		log.Fatalln(err)
-	}
-
-	fmt.Printf("Downloaded file %s with size %d", fileName, size)
-
-	f, err := os.Open(fileName)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	time.Sleep(10 * time.Second)
-	img1, _, err := image.Decode(f)
-	if err != nil {
-		log.Printf("image decode err")
-		log.Fatalln(err)
-	}
+	img1 := fetchImg("public.jpeg")
 	var dur time.Duration
 	dur = 30
 
