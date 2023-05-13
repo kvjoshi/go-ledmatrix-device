@@ -248,6 +248,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	time.Sleep(10 * time.Second)
 	img1, _, err := image.Decode(f)
 	if err != nil {
 		log.Printf("image decode err")
