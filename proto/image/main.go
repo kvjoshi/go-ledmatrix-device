@@ -27,7 +27,7 @@ var (
 	chain                  = flag.Int("led-chain", 23, "number of displays daisy-chained")
 	brightness             = flag.Int("brightness", 100, "brightness (0-100)")
 	gpio_slowdown          = flag.Int("led-gpio-slowdown", 2, "GPIO SLOWDOWN")
-	pwm_lsb                = flag.Int("led-pwm-lsb-nanoseconds", 60, "lsb nanosec")
+	pwm_lsb                = flag.Int("led-pwm-lsb-nanoseconds", 70, "lsb nanosec")
 	pwm_bits               = flag.Int("led-pwm-bits", 5, "pwm bits")
 	hardwareMapping        = flag.String("led-gpio-mapping", "regular", "Name of GPIO mapping used.")
 	showRefresh            = flag.Bool("led-show-refresh", true, "Show refresh rate.")
@@ -35,7 +35,8 @@ var (
 	disableHardwarePulsing = flag.Bool("led-no-hardware-pulse", false, "Don't use hardware pin-pulse generation.")
 	pixelMapping           = flag.String("led-pixel-mapper", "U-mapper", "Pixel mapping from api")
 	img                    = flag.String("image", "/home/dietpi/cc/i2.jpg", "image path")
-	rotate                 = flag.Int("rotate", 0, "rotate angle, 90, 180, 270")
+
+	rotate = flag.Int("rotate", 0, "rotate angle, 90, 180, 270")
 )
 
 var (
