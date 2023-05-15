@@ -142,7 +142,7 @@ type Schedule struct {
 }
 
 func getContentSchedule() []Schedule {
-	getScheduleUrl := "http://142.93.198.132:3000/api/sch/getScheduleBySidD"
+	getScheduleUrl := "http://142.93.198.132:3001/api/sch/getScheduleBySidD"
 	//getScheduleUrl := "http://192.168.1.2:3000/api/sch/getScheduleBySidD"
 	/* scheduleURL, err := url.Parse(getScheduleUrl)
 	if err != nil {
