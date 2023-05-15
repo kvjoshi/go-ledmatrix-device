@@ -68,7 +68,8 @@ func getFileSize(filename string) int64 {
 	return info.Size()
 }
 func fetchImg(imgUrl string) image.Image {
-	fullURLFile = "http://api.pumpguard.net/api/dota/download/" + imgUrl
+	//base :="http://api.pumpguard.net/api/dota/download/"
+	fullURLFile = imgUrl
 	fileURL, err := url.Parse(fullURLFile)
 	if err != nil {
 		log.Printf("err in prasing url")

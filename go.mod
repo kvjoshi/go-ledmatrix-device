@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/disintegration/imaging v1.6.2
+	github.com/eclipse/paho.mqtt.golang v1.4.2
 	github.com/enotofil/cyrfont v0.0.0-20170920134443-7af1b223a645
 	github.com/fogleman/gg v1.3.0
 	github.com/pkg/errors v0.9.1
@@ -17,5 +18,8 @@ require (
 	github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802 // indirect
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200222043503-6f7a984d4dc4 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
-	golang.org/x/sys v0.0.0-20210510120138-977fb7262007 // indirect
+	github.com/gorilla/websocket v1.5.0 // indirect
+	golang.org/x/net v0.10.0 // indirect
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
+	golang.org/x/sys v0.8.0 // indirect
 )
