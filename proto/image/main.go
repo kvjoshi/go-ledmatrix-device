@@ -125,6 +125,7 @@ func fetchImg(imgUrl string) image.Image {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer f.Close()
 	img1, _, err := image.Decode(f)
 	if err != nil {
 		log.Printf("image decode err")
